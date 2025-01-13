@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Kredit - KUR</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: left;
+            background-color: #f4f4f4;
+            font-size: small;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .output {
+            font-weight: bold;
+            background-color: #e9ffe9;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Kalkulator Kredit Mikro</h1>
+
+<table>
+    <tr>
+        <th>No</th>
+        <th style="width: 20%;">Parameter</th>
+        <th>Input</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Jenis Produk</td>
+        <td><select id="jenisProduk">
+            <option value="">-</option>
+            <option value="1">KUR</option>
+            <option value="2">KRUPUK PUTIH</option>
+            <option value="3">KRUPUK JUMBO</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Nama Calon Debitur</td>
+        <td><input type="text" id="namaDebitur" placeholder="Masukkan nama"></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Nama Usaha</td>
+        <td><input type="text" id="namaUsaha" placeholder="Masukkan nama usaha"></td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Sektor Usaha</td>
+        <td><input type="text" id="sektorUsaha" placeholder="Masukkan sektor usaha"></td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Jenis Kredit</td>
+        <td><select id="jenisKredit">
+            <option value="">-</option>
+            <option value="Modal Kerja">Modal Kerja</option>
+            <option value="Investasi">Investasi</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>Lama Usaha</td>
+        <td><select id="lamaUsaha">
+            <option value="">-</option>
+            <option value="5">&gt; 7 tahun</option>
+            <option value="4">&gt; 5-7 tahun</option>
+            <option value="3">&gt; 3-5 tahun</option>
+            <option value="2">&gt; 1-3 tahun</option>
+            <option value="1">&le; 1 tahun</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>Status Kepemilikan Tempat Usaha</td>
+        <td><select id="statusTempatUsaha">
+            <option value="">-</option>
+            <option value="3">Milik Sendiri</option>
+            <option value="2">Milik Keluarga</option>
+            <option value="1">Sewa</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>Status Kepemilikan Tempat Tinggal</td>
+        <td><select id="statusTempatTinggal">
+            <option value="">-</option>
+            <option value="3">Milik Sendiri</option>
+            <option value="2">Milik Keluarga</option>
+            <option value="1">Sewa</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>Lokasi Usaha dan Tempat Tinggal</td>
+        <td><select id="LokasiUsahaTinggal">
+            <option value="">-</option>
+            <option value="-2">Lokasi/ Alamat yang Sama</option>
+            <option value="0">Lokasi/ Alamat yang Berbeda</option>
+        </select></td>
+    </tr>
+    <tr>
+        <tr>
+            <td>10</td>
+            <td>Omset/Bulan</td>
+            <td><input type="text" id="omsetBulanan" value="0" oninput="formatNumberInput(this)"></td>
+        </tr>
+    <tr>
+        <td>11</td>
+        <td>Profit Margin (%)</td>
+        <td><select id="profitMargin">
+            <option value="">-</option>
+            <option value="5">5&percnt;</option>
+            <option value="10">10&percnt;</option>
+            <option value="15">15&percnt;</option>
+            <option value="20">20&percnt;</option>
+            <option value="25">25&percnt;</option>
+            <option value="30">30&percnt;</option>
+            <option value="35">35&percnt;</option>
+            <option value="40">40&percnt;</option>
+            <option value="50">50&percnt;</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td>12</td>
+        <td>Cadeb/Pasangan memiliki Fasilitas Produktif Aktif</td>
+        <td><select id="Keterangan">
+            <option value="">-</option>
+            <option value="1">Ada</option>
+            <option value="0">Tidak Ada</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td>13</td>
+        <td>Angsuran di Bank/Lembaga Keuangan lain</td>
+        <td><input type="text" id="angsuran" value="0" oninput="formatNumberInput(this)"></td>
+    </tr>
+    <tr>
+        <td>14</td>
+        <td>Tenor Pengajuan</td>
+        <td><select id="tenorbulan">
+            <option value="">-</option>
+            <option value="6">6 Bulan</option>
+            <option value="12">12 Bulan</option>
+            <option value="18">18 Bulan</option>
+            <option value="24">24 Bulan</option>
+            <option value="30">30 Bulan</option>
+            <option value="48">48 Bulan</option>
+            <option value="60">60 Bulan</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td>16</td>
+        <td>RPC Nett</td>
+        <td><input type="text" id="rpcNett" class="output" readonly></td>
+    </tr>
+    <tr>
+        <td>15</td>
+        <td>Plafon Minimum</td>
+        <td><input type="text" id="plafonMin" class="output" readonly></td>
+    </tr>
+    <tr>
+        <td>16</td>
+        <td>Plafon Maksimum</td>
+        <td><input type="text" id="plafonMax" class="output" readonly></td>
+    </tr>
+</table>
+
+<script type="text/javascript">
+    function formatNumberInput(input) {
+    // Hapus semua karakter non-angka
+    const rawValue = input.value.replace(/[^0-9]/g, '');
+
+    // Format ulang angka dengan pemisah ribuan
+    const formattedValue = new Intl.NumberFormat('id-ID').format(rawValue);
+
+    // Perbarui nilai input dengan angka yang diformat
+    input.value = formattedValue;
+}
+
+    var lamausaha = document.getElementById("lamaUsaha"),
+        lamavalue = lamausaha.value;
+    var statususaha = document.getElementById("statusTempatUsaha"),
+        usahavalue = statususaha.value;
+    var statustinggal = document.getElementById("statusTempatTinggal"),
+        tinggalvalue = statustinggal.value;
+    var lokasi = document.getElementById("LokasiUsahaTinggal"),
+        lokasivalue = lokasi.value;
+    let adjustment = 0;
+
+    lamausaha.onchange = () => hitung();
+    statususaha.onchange = () => hitung();
+    statustinggal.onchange = () => hitung();
+    lokasi.onchange = () => hitung();
+
+    function hitung() {
+        lamavalue = lamausaha.value;
+        usahavalue = statususaha.value;
+        tinggalvalue = statustinggal.value;
+        lokasivalue = lokasi.value;
+
+        //var sum = 0;
+        var a = +lamavalue;
+        var b = +usahavalue;
+        var c = +tinggalvalue;
+        var d = +lokasivalue;
+
+        const sum = (a + b + c + d)*0.25*100/2.75;
+        
+
+         if (sum > 85) {
+        adjustment = 0.1;
+        console.log("SUM85:", sum);
+    } else if (sum > 70) {
+        adjustment = 0.2;
+        console.log("SUM70:", sum);
+    } else if (sum > 50) {
+        adjustment = 0.35;
+        console.log("SUM8:", sum);
+    } else {
+        adjustment = 0.45;
+        console.log("SUMNOL:", sum);
+    }
+    console.log("Adjustment:", adjustment);
+    // document.getElementById("sums").value = sum;
+    }
+
+</script>
+
+    <!-- <input id="sums"/> -->
+<script type="text/javascript">
+    // var jenis = document.getElementById("jenisProduk"),
+    //     jenisvalue = jenis.value;
+
+    //     jenis.onchange = () => calculate();
+        
+
+        let bunga = 0;
+
+    function calculate() {
+        const omset = parseFloat(document.getElementById('omsetBulanan').value) || 0;
+        const profitMargin = parseFloat(document.getElementById('profitMargin').value) / 100 || 0;
+        const angsuran = parseFloat(document.getElementById("angsuran").value) || 0;
+        const KeteranganAngsuran = parseInt(document.getElementById("Keterangan").value) || 0;
+        const tenor = parseFloat(document.getElementById("tenorbulan").value) || 0;
+        const jenis = parseInt(document.getElementById('jenisProduk').value) || 0;
+
+        let rpcNett = 0;
+
+        // Calculate RPC Nett (Profit Margin * Omset)
+        if (KeteranganAngsuran === 0) {
+            profit = profitMargin * omset*1000000;
+            rpc = profit * 0.4;
+            rpcNett = rpc;
+        } else {
+            profit = profitMargin * omset*1000000;
+            rpc = profit * 0.5;
+            rpcNett = (rpc - angsuran*1000000);
+        }
+        
+        document.getElementById('rpcNett').value = rpcNett.toLocaleString('id-ID', {
+            style: 'currency', currency: 'IDR'
+        });
+
+        // Example Plafon Calculations (Placeholder logic)
+        let plafonMin = 0;
+        let plafonMax = 0;
+
+    
+        console.log("Jenis Kredit:", jenis);
+        if (jenis === 1) {
+            bunga = 0.032;
+            console.log("bunga :", bunga);
+        } else if (jenis === 2){
+            bunga = 0.18;
+            console.log("bunga :", bunga);
+        } else if (jenis === 3){
+            bunga = 0.15;
+            console.log("bunga :", bunga);
+        }
+
+        if (rpcNett > 0){
+            plafonMax = (rpcNett * tenor)/(bunga*(tenor/12)+1);
+            plafonMin = (plafonMax - plafonMax * adjustment);
+        }
+        
+        document.getElementById('plafonMin').value = plafonMin.toLocaleString('id-ID', {
+            style: 'currency', currency: 'IDR'
+        });
+        document.getElementById('plafonMax').value = plafonMax.toLocaleString('id-ID', {
+            style: 'currency', currency: 'IDR'
+        });
+    }
+
+    // Attach calculation logic to input fields
+    document.querySelectorAll('input, select').forEach(input => {
+        input.addEventListener('input', calculate);
+    });
+
+    // Initial calculation
+    calculate();
+</script>
+
+</body>
+</html>
